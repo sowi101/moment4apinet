@@ -14,6 +14,6 @@ namespace moment4.Models
 
         // Relation to Genre
         public int GenreId { get; set; }
-        public Genre Genre { get; set; }
+        public Genre? Genre { get; set; }
     }
 }

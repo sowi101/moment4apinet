@@ -41,9 +41,6 @@ namespace moment4.Controllers
               return NotFound();
           }
             var song = await _context.Songs.Include(s => s.Genre).FirstOrDefaultAsync(i => i.SongId == id);
-                
-                
-                //FindAsync(id);
 
             if (song == null)
             {
