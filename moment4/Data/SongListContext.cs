@@ -8,6 +8,8 @@ namespace moment4.Data
     {
         public SongListContext(DbContextOptions<SongListContext> options) : base(options) { }
 
+
+        // Tables
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Song> Songs { get; set; }
     }

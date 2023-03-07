@@ -25,10 +25,14 @@ namespace moment4.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-          if (_context.Songs == null)
-          {
-              return NotFound();
-          }
+            // Check if table in database is empty
+            if (_context.Songs == null)
+            {
+                // Send response that data can't be found
+                return NotFound();
+            }
+
+            // Send response with data, with information about genre
             return await _context.Songs.Include(s => s.Genre).ToListAsync();
         }
 
@@ -36,17 +40,24 @@ namespace moment4.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Song>> GetSong(int id)
         {
-          if (_context.Songs == null)
-          {
-              return NotFound();
-          }
-            var song = await _context.Songs.Include(s => s.Genre).FirstOrDefaultAsync(i => i.SongId == id);
-
-            if (song == null)
+            // Check if table in database is empty
+            if (_context.Songs == null)
             {
+                // Send response that data can't be found
                 return NotFound();
             }
 
+            // Save specific song in database to variable, with information about genre
+            var song = await _context.Songs.Include(s => s.Genre).FirstOrDefaultAsync(i => i.SongId == id);
+
+            // Check if variable is empty
+            if (song == null)
+            {
+                // Send response that data can't be found
+                return NotFound();
+            }
+
+            // Send response with data
             return song;
         }
 
